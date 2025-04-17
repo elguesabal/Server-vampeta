@@ -24,5 +24,3 @@ void acessPointerStart(void) {
         M5CARDPUTER.printf("Host: %s\n", WiFi.softAPIP().toString().c_str());
     #endif
 }
-
-

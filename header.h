@@ -3,6 +3,7 @@
 
 #include <M5Cardputer.h>
 #include <WiFi.h>
+#include <DNSServer.h>
 #include <WebServer.h>
 #include <uri/UriBraces.h>
 #include <SPI.h>
@@ -17,11 +18,15 @@
 #define SSID "vampeta"                              // NOME DA REDE WIFI
 // #define PASSWORD "12345678"                      // SENHA DA REDE WIFI (PODE REMOVER CASO NAO QUEIRA SENHA)
 
+#define PORT_DNS 53                                 // PORTA PADRAO DO DNS
+#define DOMAIN "vampeta.com"                        // DOMINIO A SER RESPONDIDO PELO DNS
+
 #define PORT_FRONT_END 80                           // PORTA ONDE O FRONT END VAI ESCUTAR AS REQUISICOES (PODE REMOVER CASO NAO QUEIRA FRONT END)
 #define PATH_FRONT_END "/Front-end"                 // PASTA ONDE SE DEVE ENCONTRAR OS ARQUIVOS FRONT END
 #define PORT_BACK_END 4242                          // PORTA ONDE O BACK END VAI ESCUTAR AS REQUISICOES (PODE REMOVER CASO NAO QUEIRA BACK END)
 #define PATH_BACK_END "/Back-end"                   // PASTA ONDE SE DEVE ENCONTRAR OS ARQUIVOS BACK END
 
+extern DNSServer *dns;
 extern WebServer *frontEnd;
 extern WebServer *backEnd;
 
@@ -36,6 +41,9 @@ void acessPointerStart(void);
 void sdStart(void);
 bool checkPath(const char *path);
 void checkSD(void);
+
+// ./dns.cpp
+void dnsStart(void);
 
 // ./front-end.cpp
 void frontEndStart(void);
